@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds">
+    <property name="LOG_HOME" value="E:\springbootRpcDemoLog"/>
+
+    <!-- 彩色日志 -->
+    <!-- 彩色日志依赖的渲染类 -->
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
+    <conversionRule conversionWord="wex"
+                    converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter"/>
+    <conversionRule conversionWord="wEx"
+                    converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
+    <!-- 文件格式 -->
+    <property name="PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss} - [%thread] - %-5level - %logger{50} - %msg%n"/>
+
+    <!-- 彩色日志格式 -->
+   <!-- <property name="CONSOLE_LOG_PATTERN"
+              value="${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(&#45;&#45;){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+    />-->
+    <property name="CONSOLE_LOG_PATTERN"
+              value="%date{yyyy-MM-dd HH:mm:ss} | %highlight(%5p) | %green(%thread) | %boldMagenta(%logger) | %cyan(%msg%n)"/>
+
+
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="LOG_DEBUG"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>
+                ${PATTERN}
+            </pattern>
+            <charset>GBK</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/debug/info_log_%d{yyyyMMdd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>200MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>90</maxHistory><!-- 保存90天-->
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <prudent>false</prudent>
+    </appender>
+
+    <appender name="LOG_INFO"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>
+                ${PATTERN}
+            </pattern>
+            <charset>GBK</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/info/info_log_%d{yyyyMMdd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>200MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>90</maxHistory><!-- 保存90天-->
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <prudent>false</prudent>
+    </appender>
+
+    <appender name="LOG_ERROR"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <!--<pattern>
+                [%date{yyyy-MM-dd HH:mm:ss}] [ %-5level] %logger{96} - %msg%n
+            </pattern>
+
+            <charset>UTF-8</charset>-->
+            <pattern>
+                ${PATTERN}
+            </pattern>
+            <charset>GBK</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/error/error_log_%d{yyyyMMdd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>200MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>6</maxHistory>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <prudent>false</prudent>
+    </appender>
+
+
+    <!--<appender name="Sentry" class="com.getsentry.raven.logback.SentryAppender">
+        <dsn>https://c6fb8bf2a380850a514:1867ceb5621c39b2@sentry.wangjing.cn/15</dsn>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+    </appender>-->
+
+    <!--<logger name="logback.SentryAppenderIT" level="INFO">
+        <appender-ref ref="Sentry"/>
+    </logger>-->
+
+    <root level="INFO">
+        <appender-ref ref="Console"/>
+       <!-- <appender-ref ref="Sentry"/>-->
+        <appender-ref ref="LOG_INFO"/>
+        <appender-ref ref="LOG_ERROR"/>
+    </root>
+</configuration>

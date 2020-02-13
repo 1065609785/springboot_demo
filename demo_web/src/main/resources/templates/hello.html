@@ -1,0 +1,26 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>测试</title>
+    <link href="/layui/css/layui.css" th:href="@{/layui/css/layui.css}" rel="stylesheet">
+    <script src="/js/jquery-1.9.1.min.js" th:src="@{/js/jquery-1.9.1.min.js}"></script>
+
+</head>
+<body>
+<p th:text="'Hello, ' + ${name} + '!'"></p>
+222
+
+<table>
+    <tr th:each="cgs : ${cgsList}">
+        <td th:text="${cgs.nsrsbh}">Onions</td>
+        <td th:text="${cgs.nsrmc}">2.41</td>
+        <td th:text="${cgs.clcp}">yes</td>
+        <td th:text="${cgs.fdjhm}">yes</td>
+    </tr>
+</table>
+<script>
+
+
+</script>
+</body>
+</html>

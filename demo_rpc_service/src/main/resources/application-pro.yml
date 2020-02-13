@@ -1,0 +1,98 @@
+#应用配置
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    jdbc-url: jdbc:oracle:thin:@192.168.201.106:1521:orcl
+    url: jdbc:oracle:thin:@192.168.201.106:1521:orcl
+    username: wtdz_ww2
+    password: ENC(zxXKiQ19fqyPYdJiWtIIEouqiDICiTJp)
+    type: com.alibaba.druid.pool.DruidDataSource
+    ##########################  druid配置   ##########################
+    # 下面为连接池的补充设置，应用到上面所有数据源中# 初始化大小，最小，最大
+    ##################    连接池配置    ################
+    druid:
+      initial-size: 8 #连接池建立时创建的初始化连接数
+      min-idle: 1 #连接池中最小的活跃连接数
+      max-active: 20 #连接池中最大的活跃连接数
+      max-wait: 60000 # 配置获取连接等待超时的时间
+      time-between-eviction-runsMillis: 60000
+      min-evictable-idle-timeMillis: 300000
+      validation-query: select * FROM DUAL
+      test-while-idle: true #是否在连接空闲一段时间后检测其可用性
+      test-on-borrow: false #是否在获得连接后检测其可用性
+      test-on-return: false #是否在连接放回连接池后检测其可用性
+      pool-prepared-statements: true # 打开PSCache，并且指定每个连接上PSCache的大小
+      max-open-prepared-statements: 20
+      max-pool-prepared-statement-per-connection-size: 20
+      filters: stat,wall,log4j2 # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙，log4j2为你自己使用的日志，如果是log4j就写log4j,我这里用的log4j2
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      use-global-data-source-stat: true
+      keep-alive: true
+  #第二个数据源
+  datasource2:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    jdbc-url: jdbc:oracle:thin:@192.168.202.64:1521:orcl
+    username: wtdz_ww2
+    password: ENC(zxXKiQ19fqyPYdJiWtIIEouqiDICiTJp)
+    type: com.alibaba.druid.pool.DruidDataSource
+    ##########################  druid配置   ##########################
+    # 下面为连接池的补充设置，应用到上面所有数据源中# 初始化大小，最小，最大
+    ##################    连接池配置    ################
+    druid:
+      initial-size: 8 #连接池建立时创建的初始化连接数
+      min-idle: 1 #连接池中最小的活跃连接数
+      max-active: 20 #连接池中最大的活跃连接数
+      max-wait: 60000 # 配置获取连接等待超时的时间
+      time-between-eviction-runsMillis: 60000
+      min-evictable-idle-timeMillis: 300000
+      validation-query: select * FROM DUAL
+      test-while-idle: true #是否在连接空闲一段时间后检测其可用性
+      test-on-borrow: false #是否在获得连接后检测其可用性
+      test-on-return: false #是否在连接放回连接池后检测其可用性
+      pool-prepared-statements: true # 打开PSCache，并且指定每个连接上PSCache的大小
+      max-open-prepared-statements: 20
+      max-pool-prepared-statement-per-connection-size: 20
+      filters: stat,wall,log4j2 # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙，log4j2为你自己使用的日志，如果是log4j就写log4j,我这里用的log4j2
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      use-global-data-source-stat: true
+      keep-alive: true
+# Logger Config
+logging:
+  level:
+    com.demo.dao.mapper: debug
+    root: info
+
+# 加密所需的salt(盐)
+jasypt:
+  encryptor:
+    password: PeY2GRT1EYVLvM
+    # 默认加密方式PBEWithMD5AndDES,可以更改为PBEWithMD5AndTripleDES
+    #algorithm: PBEWithMD5AndDES
+#dubbo相关配置
+dubbo:
+  application:
+    name: demo-provider
+    id: demo-provider
+  protocol:
+    port: 12345
+    name: dubbo
+  provider:
+    threads: 1 #业务处理线程池大小,业务量过大，可以放大，默认200
+    threadpool: fixed
+    loadbalance: roundrobin
+  registry:
+    address:  zookeeper://192.168.200.113:2181 # zookeeper://localhost:2181
+    protocol: zookeeper
+  scan:
+    base-packages: com.demo.demo_rpc_service.serviceImpl
+
+#生产可以去掉，该配置是为了本地开发环境启动耗内存小点
+server:
+  tomcat:
+    max-connections: 0 # Maximum number of connections that the server accepts and processes at any given time.
+    max-http-header-size: 0 # Maximum size, in bytes, of the HTTP message header.
+    max-http-post-size: 0 # Maximum size, in bytes, of the HTTP post content.
+    max-threads: 0 # Maximum number of worker threads.
+    min-spare-threads: 0 # Minimum number of worker threads.

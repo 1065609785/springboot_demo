@@ -1,0 +1,29 @@
+# Logger Config
+logging:
+  level:
+    root: info
+
+
+#dubbo相关配置
+dubbo:
+  application:
+    name: demo-consumer
+    id: demo-consumer
+  consumer:
+    id: demo-consumer01
+    timeout: 60000
+    check: false #开发环境不需要检查，生产需要检查
+    threads: 1 #生产注释掉，默认为200
+  registry:
+   # address: zookeeper://192.168.200.113:2181
+    address: zookeeper://localhost:2181
+    protocol: zookeeper
+
+#生产可以去掉，该配置是为了本地开发环境启动耗内存小点
+server:
+  tomcat:
+     max-connections: 0 # Maximum number of connections that the server accepts and processes at any given time.
+     max-http-header-size: 0 # Maximum size, in bytes, of the HTTP message header.
+     max-http-post-size: 0 # Maximum size, in bytes, of the HTTP post content.
+     max-threads: 0 # Maximum number of worker threads.
+     min-spare-threads: 0 # Minimum number of worker threads.
