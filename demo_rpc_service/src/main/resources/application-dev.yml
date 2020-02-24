@@ -128,7 +128,7 @@ dubbo:
     threadpool: fixed
     loadbalance: roundrobin
   registry:
-    address:  zookeeper://192.168.200.113:2181 # zookeeper://localhost:2181
+    address:  zookeeper://localhost:2181
     protocol: zookeeper
   scan:
     base-packages: com.demo.demo_rpc_service.serviceImpl

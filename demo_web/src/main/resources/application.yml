@@ -7,6 +7,13 @@ logging:
 spring:
   profiles:
     active: dev
+  cloud:
+    #客户端启动命令  java -Dserver.port=8080 -Dcsp.sentinel.dashboard.server=localhost:8719 -Dproject.name=sentinel-dashboard -jar sentinel-dashboard.jar
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: localhost:8080
+
 
 #生产可以去掉，该配置是为了本地开发环境启动耗内存小点
 server:
@@ -17,3 +24,5 @@ server:
      max-threads: 0 # Maximum number of worker threads.
      min-spare-threads: 0 # Minimum number of worker threads.
   port: 8083
+
+

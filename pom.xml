@@ -44,6 +44,7 @@
       <jjwt.version>0.9.1</jjwt.version>
       <hutool.version>5.1.1</hutool.version>
       <aspectj.version>1.9.5</aspectj.version>
+      <sentinel.version>1.7.1</sentinel.version>
   </properties>
     <!--管理所有子项目的版本，并不实际依赖-->
     <dependencyManagement>
@@ -175,9 +176,6 @@
               <artifactId>aspectjweaver</artifactId>
               <version>${aspectj.version}</version>
           </dependency>
-
-
-
       </dependencies>
     </dependencyManagement>
 </project>

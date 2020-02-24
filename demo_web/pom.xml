@@ -175,6 +175,15 @@
 			<artifactId>swagger-bootstrap-ui</artifactId>
 			<version>1.9.6</version>
 		</dependency>
+		<!-- 分布式系统的流量防卫兵 -->
+		<!--sentinel-->
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+			<version>2.2.0.RELEASE</version>
+		</dependency>
+		<!--sentinel end-->
+
 	</dependencies>
 
 	<build>
